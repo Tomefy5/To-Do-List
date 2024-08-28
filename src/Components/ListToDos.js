@@ -1,18 +1,33 @@
 import React, { Component } from "react";
 import ToDo from "./ToDo";
+import todosData from '../Data/listeToDo.json'
 
 class ListToDos extends Component {
+    
+    constructor(props) {
+        super(props)
+        this.state = {
+            todos: []
+        }
+    }
+
+    componentDidMount() {
+        this.setState({ todos: todosData })
+    }
+
+    
+
     render() {
         return (
             <div className="card container mb-3">
                 <ul className="list-group list-group-flush">
-                    {/* <li className="list-group-item">Task1</li>
-                    <li className="list-group-item">Task2</li>
-                    <li className="list-group-item">Task3</li> */}
-                    <ToDo />
-                    <ToDo />
-                    <ToDo />
-                    <ToDo />
+                    {
+                        this.state.todos.map(todo => {
+                            return(
+                                <ToDo key={todo.id} todo={todo} />
+                            )
+                        })
+                    }
                 </ul>
             </div>
         )
