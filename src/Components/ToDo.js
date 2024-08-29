@@ -11,7 +11,7 @@ class ToDo extends Component {
                     <label className="form-label fw-bold">{this.props.todo.todo}</label>
                 </div>
                 <div>
-                    <span className="badge bg-warning text-bg-danger">Priorité: Elevé</span>
+                    <span className="badge bg-warning text-bg-danger">Priorité: {this.props.todo.priority}</span>
                 </div>
                 <div>
                     <button className="btn btn-sm btn-outline-success">Completed</button>
