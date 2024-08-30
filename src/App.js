@@ -13,7 +13,8 @@ class App extends Component {
     const savedToDos = localStorage.getItem("todos")
 
     this.state = {
-      todos: savedToDos ? JSON.parse(savedToDos) : []
+      todos: savedToDos ? JSON.parse(savedToDos) : [],
+      todosShowed: null
     }
   }
 
@@ -83,6 +84,20 @@ class App extends Component {
       this.setState((prevState) => ({
         todos: prevState.todos.filter(todo => todo.id !== index)
       }))
+
+      console.log(this.state);
+  }
+
+  filterHandler = (event) => {
+    const filter = event.target.innerText
+
+    if(filter === 'Active') {
+      this.setState({todosShowed: 'Active'})
+    } else if(filter === 'Completed') {
+      this.setState({todosShowed: 'Completed'})
+    } else {
+      this.setState({todosShowed: null})
+    }
   }
 
   render() {
@@ -92,8 +107,12 @@ class App extends Component {
           <h1 className="display-5 text-secondary fw-bold text-center">To Do List</h1>
         </div>
         <SearchInput addNewToDo={this.addNewToDo} />
-        <FilterButtons />
-        <ListToDos todos={this.state.todos} editToDo={this.editToDo} hanldeToDoCompleted={this.hanldeToDoCompleted} deleteHandler={this.deleteHandler}/>
+        <FilterButtons filterHandler={this.filterHandler} />
+        <ListToDos  todos={this.state.todos} 
+                    editToDo={this.editToDo} 
+                    hanldeToDoCompleted={this.hanldeToDoCompleted} 
+                    deleteHandler={this.deleteHandler} 
+                    todosShowed={this.state.todosShowed}/>
       </div>
     );
   }
