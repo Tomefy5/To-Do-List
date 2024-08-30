@@ -10,7 +10,7 @@ class ListToDos extends Component {
                     {
                         this.props.todos.map((todo,index) => {
                             return(
-                                <ToDo key={todo.id} todo={todo} editToDo={this.props.editToDo} hanldeToDoCompleted={this.props.hanldeToDoCompleted}/>
+                                <ToDo key={todo.id} todo={todo} editToDo={this.props.editToDo} hanldeToDoCompleted={this.props.hanldeToDoCompleted} deleteHandler={this.props.deleteHandler}/>
                             )
                         })
                     }

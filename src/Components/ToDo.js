@@ -15,7 +15,7 @@ class ToDo extends Component {
                 </div>
                 <div>
                     <button className="btn btn-outline-primary" onClick={() => this.props.editToDo(this.props.todo.id)}>Edit</button>
-                    <button className="btn btn-sm btn-outline-danger ms-2">Delete</button>
+                    <button className="btn btn-sm btn-outline-danger ms-2" onClick={() => this.props.deleteHandler(this.props.todo.id)}>Delete</button>
                 </div>
             </li>
         )

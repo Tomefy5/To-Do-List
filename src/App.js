@@ -79,6 +79,12 @@ class App extends Component {
     this.setState({todos: updatedToDos})
   }
 
+  deleteHandler = (index) => {
+      this.setState((prevState) => ({
+        todos: prevState.todos.filter(todo => todo.id !== index)
+      }))
+  }
+
   render() {
     return (
       <div className="app container card mt-5 bg-dark">
@@ -87,7 +93,7 @@ class App extends Component {
         </div>
         <SearchInput addNewToDo={this.addNewToDo} />
         <FilterButtons />
-        <ListToDos todos={this.state.todos} editToDo={this.editToDo} hanldeToDoCompleted={this.hanldeToDoCompleted}/>
+        <ListToDos todos={this.state.todos} editToDo={this.editToDo} hanldeToDoCompleted={this.hanldeToDoCompleted} deleteHandler={this.deleteHandler}/>
       </div>
     );
   }
