@@ -13,12 +13,12 @@ class App extends Component {
     const savedToDos = localStorage.getItem("todos")
 
     this.state = {
-      todos: savedToDos ? JSON.stringify(savedToDos) : []
+      todos: savedToDos ? JSON.parse(savedToDos) : []
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState !== this.state.todos) {
+    if (prevState.todos !== this.state.todos) {
       localStorage.setItem("todos", JSON.stringify(this.state.todos))
     }
   }
@@ -41,6 +41,44 @@ class App extends Component {
 
   }
 
+  editToDo = (index) => {
+    const todoTexteEdit = prompt("Enter to-do name: ")
+    let todoEditPriority = prompt("Entrer the priority (low/medium/high): ")
+
+    while(todoEditPriority !== 'low' && todoEditPriority !== 'medium' && todoEditPriority !== 'high') {
+      todoEditPriority = prompt("Entrer the priority (low/medium/high): ")
+    }
+
+    if (todoTexteEdit && todoEditPriority) {
+      const updatedToDos = this.state.todos.map((todo, compt) => {
+        if (compt === index) {
+          return {
+            ...todo,
+            todo: todoTexteEdit,
+            priority: todoEditPriority
+          }
+        }
+        return todo
+      })
+
+      this.setState({todos: updatedToDos})
+    }
+  }
+
+  hanldeToDoCompleted = (index) => {
+    const updatedToDos = this.state.todos.map((todo, compt) => {
+      if(compt === index) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        }
+      }
+      return todo
+    })
+
+    this.setState({todos: updatedToDos})
+  }
+
   render() {
     return (
       <div className="app container card mt-5 bg-dark">
@@ -49,7 +87,7 @@ class App extends Component {
         </div>
         <SearchInput addNewToDo={this.addNewToDo} />
         <FilterButtons />
-        <ListToDos todos={this.state.todos} />
+        <ListToDos todos={this.state.todos} editToDo={this.editToDo} hanldeToDoCompleted={this.hanldeToDoCompleted}/>
       </div>
     );
   }

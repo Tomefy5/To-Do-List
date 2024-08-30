@@ -8,9 +8,9 @@ class ListToDos extends Component {
             <div className="card container mb-3">
                 <ul className="list-group list-group-flush">
                     {
-                        this.props.todos.map(todo => {
+                        this.props.todos.map((todo,index) => {
                             return(
-                                <ToDo key={todo.id} todo={todo} />
+                                <ToDo key={todo.id} todo={todo} editToDo={this.props.editToDo} hanldeToDoCompleted={this.props.hanldeToDoCompleted}/>
                             )
                         })
                     }
